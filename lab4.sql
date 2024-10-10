@@ -63,6 +63,10 @@ WHERE (cantidadAlumnosReservados - cantidadAlumnosReales) > 5;
 
 /* Ej 16 Obtenga la cantidad de escuelas que visitarán el parque después del '30/6/2018' */
 
+/* Ej 17 */
+
+INSERT INTO Guia
+values((SELECT Max(id_Guia) + 1 From Guia), 'Jorginho', 'Perezinho')
 
 /* Ej 20 */
 UPDATE Telefono_Escuela SET nro =  CONCAT('9', nro);
