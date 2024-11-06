@@ -149,6 +149,7 @@ WHERE
             R.dia = (
                 SELECT MIN(R2.dia)  -- Obtener la fecha mínima
                 FROM Reserva R2
+				WHERE R2.Escuela_idEscuela = R.Escuela_idEscuela
             )
     );
 
