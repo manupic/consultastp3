@@ -1,6 +1,6 @@
-FALTA HACER EL 6, 11 Y 13
+/*FALTA HACER EL 6, 11 Y 13
 REVEER EL 7
-CONTROLAR TODAS LAS CONSULTAS
+CONTROLAR TODAS LAS CONSULTAS */
 
 -- 1. Listar los tipos de visita que fueron guiadas alguna vez por Cristina Zaluzi.
 SELECT DISTINCT
@@ -76,6 +76,16 @@ GROUP BY Escuela_idEscuela
 HAVING COUNT(idReserva) > 4;
 
 -- 6. Listar el nombre, apellido y código de aquellos guías que, en alguna visita de una reserva en particular, hayan atendido por lo menos al 40% de los alumnos totales guiados en todas sus visitas.
+
+SELECT guia_idguia
+FROM Reserva_tipo_visita
+WHERE guia_idguia IN (SELECT RTV1.guia_idguia
+					  FROM Reserva_tipo_visita as RTV1
+					  GROUP BY RTV1.guia_idguia
+					  HAVING SUM(cantidad_alumnos_reales) * 0.40 < ANY (SELECT RTV2.cantidad_alumnos_reales
+												        		 FROM Reserva_tipo_visita as RTV2
+																 WHERE RTV2.guia_idguia = RTV1.guia_idguia));
+
 
 
 -- 7. Listar las reservas donde todos los tipos de visita tienen la cantidad real de alumnos mayor en un 20% adicional a la cantidad reservada. REVEER
